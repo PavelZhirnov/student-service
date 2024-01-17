@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option go_package = "github.com/pavelzhirnov/student-service/pkg/studentServiceApi;student";
+
+package student;
+
+import "ss_teacher.proto";
+
+service StudentService{
+  rpc CreateStudent(CreateStudentRequest) returns (Student) {};
+  rpc GetStudent(GetStudentRequest) returns (Student) {}
+  rpc ListStudents(ListStudentRequest) returns (ListStudentResponse) {};
+  rpc PatchStudent(UpdateStudentRequest) returns (Student) {};
+  rpc DeleteStudent(GetStudentRequest) returns (SimpleResponse) {};
+}
+
+
+message CreateStudentRequest {
+  string full_name = 1;
+  int64 age = 2;
+  int64 salary = 3;
+  repeated CreateTeacherRequest teachers = 4;
+}
+
+message GetStudentRequest {
+  string id = 1;
+}
+
+message Student {
+  string id = 1;
+  string fullName = 2;
+  int64 age = 3;
+  int64 salary = 4;
+  repeated Teacher teachers = 5;
+}
+
+message ListStudentRequest {
+  repeated string student_ids = 1;
+}
+
+message ListStudentResponse {
+  repeated Student students = 1;
+}
+
+message UpdateStudentRequest {
+  string id = 1;
+  string full_name = 2;
+  int64 age = 3;
+  int64 salary = 4;
+  repeated UpdateTeacherRequest teachers = 5;
+}
+
+message SimpleResponse {}

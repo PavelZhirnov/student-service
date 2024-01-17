@@ -1,0 +1,9 @@
+service_name: "student_service"
+ports:
+  grpc: ":50052"
+postgres:
+  host: "localhost"
+  port: "5432"
+  dbName: "student"
+  user: "postgres"
+  password: "VfyEfy635372"

@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+option go_package = "github.com/pavelzhirnov/student-service/pkg/studentServiceApi;student";
+
+package student;
+
+service TeacherService{
+  rpc CreateTeacher(CreateTeacherRequest) returns (Teacher) {};
+  rpc PatchTeacher(UpdateTeacherRequest) returns (Teacher) {};
+  rpc ListTeachers(ListTeacherRequest) returns (ListTeacherResponse) {};
+}
+
+message CreateTeacherRequest {
+  PositionType position_type = 1;
+  string full_name = 2;
+  string student_id = 3;
+}
+
+message Teacher {
+  string id = 1;
+  PositionType position_type = 2;
+  string full_name = 3;
+  string student_id = 4;
+}
+
+message UpdateTeacherRequest {
+  string id = 1;
+  PositionType position_type = 2;
+  string full_name = 3;
+}
+
+message ListTeacherRequest {
+  repeated string teacher_ids = 1;
+}
+
+message ListTeacherResponse {
+  repeated Teacher teachers = 1;
+}
+
+enum PositionType {
+  POSTGRADUATE = 0;
+  ASSISTANT = 1;
+  DEAN = 2;
+}
